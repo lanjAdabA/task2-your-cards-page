@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Row(
                             children: [
                               Icon(
-                                Icons.circle_notifications_sharp,
+                                MdiIcons.alphaMCircle,
                                 size: 60,
                                 color: Colors.orange[300],
                               ),
@@ -297,6 +297,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               Icon(
                                 Icons.build_circle_rounded,
+
+                                //      icon: FaIcon(FontAwesomeIcons.gamepad),
+
                                 size: 60,
                                 color: Colors.brown[500],
                               ),
