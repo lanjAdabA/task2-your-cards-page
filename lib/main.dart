@@ -33,6 +33,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List cardList = [Item1(), Item2(), Item3()];
+
+  List<T> map<T>(List list, Function handler) {
+    List<T> result = [];
+    for (var i = 1; i < list.length; i++) {
+      result.add(handler(i, list[i]));
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +73,28 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
+                    enlargeCenterPage: true,
                     enableInfiniteScroll: true,
-                    viewportFraction: 0.4,
-                    height: 220,
-                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.35,
+                    height: 320,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 2),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
                   ),
+                  items: cardList.map((card) {
+                    return Builder(builder: (BuildContext context) {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        width: MediaQuery.of(context).size.width,
+                        child: Card(
+                          child: card,
+                        ),
+                      );
+                    });
+                  }).toList(),
+
+                  /*
                   items: [
                     2574.08,
                     133.86,
@@ -102,12 +129,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                           ),
-
-//
                         );
                       },
                     );
                   }).toList(),
+
+                  */
                 )
               ],
             ),
@@ -117,215 +144,197 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    const Text(
-                      "Activity",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    FlatButton(
-                      onPressed: null,
-                      child:
-                          Text('History', style: TextStyle(color: Colors.grey)),
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: Colors.grey,
-                              width: 1,
-                              style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(50)),
-                    )
-                  ],
+                Container(
+                  padding: EdgeInsets.only(left: 13),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        "Activity",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      FlatButton(
+                        onPressed: null,
+                        child: Text('History',
+                            style: TextStyle(color: Colors.grey)),
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Colors.grey,
+                                width: 1,
+                                style: BorderStyle.solid),
+                            borderRadius: BorderRadius.circular(50)),
+                      )
+                    ],
+                  ),
                 ),
                 Container(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(top: 10, left: 15),
                     child: const Text(
                       "06 June",
                       style: TextStyle(color: Colors.grey, fontSize: 18),
                     )),
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.food_bank_rounded,
-                              size: 60,
-                              color: Colors.orange[300],
-                            ),
-                            Text(
-                              "McDonald's",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 5.99",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.health_and_safety_rounded,
-                              size: 60,
-                              color: Colors.red[300],
-                            ),
-                            Text(
-                              "Health insurance",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 54.51",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.account_circle,
-                              size: 60,
-                              color: Colors.grey[500],
-                            ),
-                            Text(
-                              "transfer",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("\$ 150",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.receipt_rounded,
-                              size: 60,
-                              color: Colors.blue[300],
-                            ),
-                            Text(
-                              "Bills",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 400.00",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.school_rounded,
-                              size: 60,
-                              color: Colors.green[300],
-                            ),
-                            Text(
-                              "School fee",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 123.25",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.shopping_cart,
-                              size: 60,
-                              color: Colors.purple[300],
-                            ),
-                            Text(
-                              "Shopping",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 54.32",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.agriculture_rounded,
-                              size: 60,
-                              color: Colors.brown[500],
-                            ),
-                            Text(
-                              "Vehicle servicing",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 1540.53",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.where_to_vote,
-                              size: 60,
-                              color: Colors.blue[300],
-                            ),
-                            Text(
-                              "Tour expenses",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        const Text("-\$ 2660.00",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                  ],
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.circle_notifications_sharp,
+                                size: 60,
+                                color: Colors.orange[300],
+                              ),
+                              Text(
+                                "McDonald's",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 5.99",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.add_circle,
+                                size: 60,
+                                color: Colors.red[300],
+                              ),
+                              Text(
+                                "Health insurance",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 54.51",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.account_circle,
+                                size: 60,
+                                color: Colors.grey[500],
+                              ),
+                              Text(
+                                "transfer",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("\$ 150",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.supervised_user_circle,
+                                size: 60,
+                                color: Colors.green[300],
+                              ),
+                              Text(
+                                "School fee",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 123.25",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.playlist_add_check_circle,
+                                size: 60,
+                                color: Colors.purple[300],
+                              ),
+                              Text(
+                                "Shopping",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 54.32",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.build_circle_rounded,
+                                size: 60,
+                                color: Colors.brown[500],
+                              ),
+                              Text(
+                                "Vehicle servicing",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 1540.53",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.flag_circle_rounded,
+                                size: 60,
+                                color: Colors.pink[300],
+                              ),
+                              Text(
+                                "Tour expenses",
+                                style:
+                                    TextStyle(fontSize: 16, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          const Text("-\$ 2660.00",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -335,10 +344,106 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-/* 
-       
-        */
 
-/*
+class Item1 extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
+  const Item1();
 
-          */
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: Colors.red[400],
+      child: Container(
+        padding: EdgeInsets.all(18),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Icon(Icons.credit_card_rounded),
+                Text("****4092"),
+              ],
+            ),
+            Text(
+              "\$ 14.94",
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Item2 extends StatelessWidget {
+  const Item2();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: Colors.orange[300],
+      child: Container(
+        padding: EdgeInsets.all(18),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Icon(Icons.credit_card_rounded),
+                Text("****3292"),
+              ],
+            ),
+            Text(
+              "\$ 144.99",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Item3 extends StatelessWidget {
+  const Item3();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: Colors.white70,
+      child: Container(
+        padding: EdgeInsets.all(18),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Icon(Icons.credit_card_rounded),
+                Text("****0092"),
+              ],
+            ),
+            Text(
+              "\$ 2,438",
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
