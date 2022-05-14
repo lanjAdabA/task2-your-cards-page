@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -364,7 +365,10 @@ class Item1 extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Icon(Icons.credit_card_rounded),
+                Icon(
+                  MdiIcons.circleMultiple,
+                  color: Colors.amber,
+                ),
                 Text("****4092"),
               ],
             ),
@@ -380,6 +384,7 @@ class Item1 extends StatelessWidget {
 }
 
 class Item2 extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const Item2();
 
   @override
@@ -397,12 +402,15 @@ class Item2 extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Icon(Icons.credit_card_rounded),
+                Icon(
+                  MdiIcons.circleMultiple,
+                  color: Colors.deepOrange,
+                ),
                 Text("****3292"),
               ],
             ),
             Text(
-              "\$ 144.99",
+              "\$ 1,447",
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -416,6 +424,7 @@ class Item2 extends StatelessWidget {
 }
 
 class Item3 extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const Item3();
 
   @override
@@ -433,7 +442,10 @@ class Item3 extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Icon(Icons.credit_card_rounded),
+                Icon(
+                  MdiIcons.circleMultiple,
+                  color: Colors.orange,
+                ),
                 Text("****0092"),
               ],
             ),
